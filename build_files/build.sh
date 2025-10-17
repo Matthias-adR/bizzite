@@ -45,6 +45,26 @@ add_wants_niri udiskie.service
 add_wants_niri xwayland-satellite.service
 cat /usr/lib/systemd/user/niri.service
 
+### fonts
+
+dnf install -y \
+    default-fonts-core-emoji \
+    google-noto-fonts-all \
+    google-noto-color-emoji-fonts \
+    google-noto-emoji-fonts \
+    glibc-all-langpacks
+
+mkdir -p "/usr/share/fonts/Maple Mono"
+
+MAPLE_TMPDIR="$(mktemp -d)"
+trap 'rm -rf "${MAPLE_TMPDIR}"' EXIT
+
+LATEST_RELEASE_FONT="$(curl "https://api.github.com/repos/subframe7536/maple-font/releases/latest" | jq '.assets[] | select(.name == "MapleMono-Variable.zip") | .browser_download_url' -rc)"
+curl -fSsLo "${MAPLE_TMPDIR}/maple.zip" "${LATEST_RELEASE_FONT}"
+unzip "${MAPLE_TMPDIR}/maple.zip" -d "/usr/share/fonts/Maple Mono"
+
+echo 'source /usr/share/zirconium/shell/pure.bash' | tee -a "/etc/bashrc"
+
 #### Example for enabling a System Unit File
 
 #systemctl enable podman.socket
