@@ -35,6 +35,8 @@ mkdir -p /etc/skel/.config/quickshell/noctalia-shell
 curl -sL https://github.com/noctalia-dev/noctalia-shell/releases/latest/download/noctalia-latest.tar.gz \
     | tar -xz --strip-components=1 -C /etc/skel/.config/quickshell/noctalia-shell
 
+mkdir -p /etc/niri
+
 echo "default_session=noctalia" > /etc/niri/niri.conf
 
 dnf -y install \
