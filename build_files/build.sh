@@ -46,6 +46,7 @@ dnf -y install \
     tuigreet \
     udiskie \
     wlsunset \
+    xwayland-satellite \
 
 add_wants_niri() {
     sed -i "s/\[Unit\]/\[Unit\]\nWants=$1/" "/usr/lib/systemd/user/niri.service"
