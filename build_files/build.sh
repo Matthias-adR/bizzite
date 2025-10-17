@@ -31,6 +31,12 @@ dnf -y copr enable errornointernet/quickshell
 dnf -y copr disable errornointernet/quickshell
 dnf -y --enablerepo copr:copr.fedorainfracloud.org:errornointernet:quickshell install quickshell
 
+mkdir -p /etc/skel/.config/quickshell/noctalia-shell
+curl -sL https://github.com/noctalia-dev/noctalia-shell/releases/latest/download/noctalia-latest.tar.gz \
+    | tar -xz --strip-components=1 -C /etc/skel/.config/quickshell/noctalia-shell
+
+echo "default_session=noctalia" > /etc/niri/niri.conf
+
 dnf -y install \
     brightnessctl \
     gnome-keyring \
@@ -51,7 +57,7 @@ cat /usr/lib/systemd/user/niri.service
 
 # TESTING
 
-enable noctalia.service
+#enable noctalia.service
 enable xwayland-satellite.service
 
 ### fonts
