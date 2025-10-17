@@ -60,7 +60,7 @@ cat /usr/lib/systemd/user/niri.service
 # TESTING
 
 #enable noctalia.service
-enable xwayland-satellite.service
+systemctl enable xwayland-satellite.service
 
 ### fonts
 
