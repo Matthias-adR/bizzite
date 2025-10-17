@@ -27,6 +27,10 @@ dnf -y copr disable yalter/niri
 dnf -y --enablerepo copr:copr.fedorainfracloud.org:yalter:niri install niri
 rm -rf /usr/share/doc/niri
 
+dnf -y copr enable errornointernet/quickshell
+dnf -y copr disable errornointernet/quickshell
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:errornointernet:quickshell install quickshell
+
 dnf -y install \
     brightnessctl \
     gnome-keyring \
