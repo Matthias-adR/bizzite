@@ -39,10 +39,6 @@ mkdir -p /etc/niri
 
 echo "default_session=noctalia" > /etc/niri/niri.conf
 
-dnf -y copr enable purian23/matugen
-dnf -y copr disable purian23/matugen
-dnf -y --enablerepo copr:copr.fedorainfracloud.org:puritan23/matugen install matugen
-
 dnf -y install \
     brightnessctl \
     gnome-keyring \
@@ -50,7 +46,6 @@ dnf -y install \
     tuigreet \
     udiskie \
     wlsunset \
-    xwayland-satellite \
     cava \
 
 add_wants_niri() {
@@ -66,7 +61,6 @@ cat /usr/lib/systemd/user/niri.service
 # TESTING
 
 #enable noctalia.service
-systemctl enable xwayland-satellite.service
 
 git clone "https://github.com/zirconium-dev/zdots.git" /usr/share/zirconium/zdots
 cp -f /usr/share/zirconium/zdots/dot_config/niri/config.kdl /etc/niri/config.kdl
