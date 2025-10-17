@@ -68,6 +68,9 @@ cat /usr/lib/systemd/user/niri.service
 #enable noctalia.service
 systemctl enable xwayland-satellite.service
 
+git clone "https://github.com/zirconium-dev/zdots.git" /usr/share/zirconium/zdots
+cp -f /usr/share/zirconium/zdots/dot_config/niri/config.kdl /etc/niri/config.kdl
+
 ### fonts
 
 dnf install -y \
