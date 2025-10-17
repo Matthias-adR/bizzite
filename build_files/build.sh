@@ -45,6 +45,11 @@ add_wants_niri udiskie.service
 add_wants_niri xwayland-satellite.service
 cat /usr/lib/systemd/user/niri.service
 
+# TESTING
+
+enable noctalia.service
+enable xwayland-satellite.service
+
 ### fonts
 
 dnf install -y \
