@@ -39,6 +39,10 @@ mkdir -p /etc/niri
 
 echo "default_session=noctalia" > /etc/niri/niri.conf
 
+dnf -y copr enable purian23/matugen
+dnf -y copr disable purian23/matugen
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:puritan23/matugen install matugen
+
 dnf -y install \
     brightnessctl \
     gnome-keyring \
@@ -47,6 +51,7 @@ dnf -y install \
     udiskie \
     wlsunset \
     xwayland-satellite \
+    cava \
 
 add_wants_niri() {
     sed -i "s/\[Unit\]/\[Unit\]\nWants=$1/" "/usr/lib/systemd/user/niri.service"
@@ -81,7 +86,7 @@ LATEST_RELEASE_FONT="$(curl "https://api.github.com/repos/subframe7536/maple-fon
 curl -fSsLo "${MAPLE_TMPDIR}/maple.zip" "${LATEST_RELEASE_FONT}"
 unzip "${MAPLE_TMPDIR}/maple.zip" -d "/usr/share/fonts/Maple Mono"
 
-echo 'source /usr/share/zirconium/shell/pure.bash' | tee -a "/etc/bashrc"
+echo 'source /usr/share/bizzite/shell/pure.bash' | tee -a "/etc/bashrc"
 
 #### Example for enabling a System Unit File
 
