@@ -5,9 +5,6 @@ set -ouex pipefail
 systemctl enable systemd-timesyncd
 systemctl enable systemd-resolved.service
 
-dnf -y install \
-    uxplay     \
-
 dnf -y copr enable yalter/niri
 dnf -y copr disable yalter/niri
 dnf -y --enablerepo copr:copr.fedorainfracloud.org:yalter:niri install niri
@@ -17,40 +14,46 @@ dnf -y copr enable scottames/ghostty
 dnf -y copr disable scottames/ghostty
 dnf -y --enablerepo copr:copr.fedorainfracloud.org:scottames:ghostty install ghostty
 
+dnf -y copr enable alternateved/cliphist
+dnf -y copr disable alternateved/cliphist
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:alternateved:cliphist install cliphist
+
 dnf -y copr enable errornointernet/quickshell
 dnf -y copr disable errornointernet/quickshell
 dnf -y --enablerepo copr:copr.fedorainfracloud.org:errornointernet:quickshell install quickshell
 
-mkdir -p /etc/skel/.config/quickshell/noctalia-shell
-curl -sL https://github.com/noctalia-dev/noctalia-shell/releases/latest/download/noctalia-latest.tar.gz \
-    | tar -xz --strip-components=1 -C /etc/skel/.config/quickshell/noctalia-shell
+dnf -y copr enable brycensranch/gpu-screen-recorder-git
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:brycensranch:gpu-screen-recorder-git install gpu-screen-recorder-ui
+dnf -y copr disable brycensranch/gpu-screen-recorder-git
 
-mkdir -p /etc/niri
-
-mkdir -p /usr/lib/systemd/user
-cat << 'EOF' > /usr/lib/systemd/user/noctalia.service
-[Unit]
-Description=Noctalia Shell (Quickshell-based)
-
-[Service]
-ExecStart=/usr/bin/quickshell --config /etc/skel/.config/quickshell/noctalia-shell
-Restart=on-failure
-
-[Install]
-WantedBy=default.target
-EOF
-
-echo "default_session=noctalia" > /etc/niri/niri.conf
 
 dnf -y install \
+    uxplay \
+    udiskie \
+    xdg-desktop-portal-gnome \
+    swaybg \
+    swayidle \
+    swaylock \
     brightnessctl \
     gnome-keyring \
+    greetd \
+    greetd-selinux \
     nautilus \
     tuigreet \
     udiskie \
     wlsunset \
+    xdg-user-dirs \
+    xwayland-satellite \
     cava \
-    foot \
+    fuzzel \
+
+
+systemctl disable sddm
+systemctl enable greetd
+systemctl enable firewalld
+systemctl enable podman.socket
+systemctl enable podman.service
+
 
 add_wants_niri() {
     sed -i "s/\[Unit\]/\[Unit\]\nWants=$1/" "/usr/lib/systemd/user/niri.service"
@@ -62,17 +65,46 @@ add_wants_niri udiskie.service
 add_wants_niri xwayland-satellite.service
 cat /usr/lib/systemd/user/niri.service
 
-git clone "https://github.com/zirconium-dev/zdots.git" /usr/share/zirconium/zdots
-cp -f /usr/share/zirconium/zdots/dot_config/niri/config.kdl /etc/niri/config.kdl
 
-### fonts
+sed -i '/gnome_keyring.so/ s/-auth/auth/ ; /gnome_keyring.so/ s/-session/session/' /etc/pam.d/greetd
+cat /etc/pam.d/greetd
 
-dnf install -y \
-    default-fonts-core-emoji \
-    google-noto-fonts-all \
-    google-noto-color-emoji-fonts \
-    google-noto-emoji-fonts \
-    glibc-all-langpacks
+
+dnf install -y --setopt=install_weak_deps=False \
+    polkit-kde
+
+sed -i "s/After=.*/After=graphical-session.target/" /usr/lib/systemd/user/plasma-polkit-agent.service
+
+
+dnf -y install --enablerepo=fedora-multimedia \
+    ffmpeg libavcodec @multimedia gstreamer1-plugins-{bad-free,bad-free-libs,good,base} lame{,-libs} libjxl ffmpegthumbnailer
+
+
+sed -i 's|^ExecStart=.*|ExecStart=/usr/bin/bootc update --quiet|' /usr/lib/systemd/system/bootc-fetch-apply-updates.service
+sed -i 's|^OnUnitInactiveSec=.*|OnUnitInactiveSec=7d\nPersistent=true|' /usr/lib/systemd/system/bootc-fetch-apply-updates.timer
+sed -i 's|#AutomaticUpdatePolicy.*|AutomaticUpdatePolicy=stage|' /etc/rpm-ostreed.conf
+
+cp -avf "/ctx/files"/. /
+mkdir -p /etc/skel/Pictures/Wallpapers
+ln -s /usr/share/bizzite/skel/Pictures/Wallpapers/ublue.png /etc/skel/Pictures/Wallpapers/ublue.png
+
+
+systemctl enable --global noctalia.service
+systemctl enable --global plasma-polkit-agent.service
+systemctl enable --global swayidle.service
+systemctl enable --global udiskie.service
+systemctl enable --global xwayland-satellite.service
+systemctl preset --global noctalia
+systemctl preset --global plasma-polkit-agent
+systemctl preset --global swayidle
+systemctl preset --global udiskie
+systemctl preset --global xwayland-satellite
+
+
+git clone "https://github.com/noctalia-dev/noctalia-shell.git" /usr/share/bizzite-experi/noctalia-shell
+install -d /etc/niri/
+cp -f /usr/share/bizzite-experi/zdots/dot_config/niri/config.kdl /etc/niri/config.kdl
+
 
 mkdir -p "/usr/share/fonts/Maple Mono"
 
