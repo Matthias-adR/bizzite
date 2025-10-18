@@ -37,6 +37,19 @@ curl -sL https://github.com/noctalia-dev/noctalia-shell/releases/latest/download
 
 mkdir -p /etc/niri
 
+mkdir -p /usr/lib/systemd/user
+cat << 'EOF' > /usr/lib/systemd/user/noctalia.service
+[Unit]
+Description=Noctalia Shell (Quickshell-based)
+
+[Service]
+ExecStart=/usr/bin/quickshell --config %h/.config/quickshell/noctalia-shell
+Restart=on-failure
+
+[Install]
+WantedBy=default.target
+EOF
+
 echo "default_session=noctalia" > /etc/niri/niri.conf
 
 dnf -y install \
@@ -47,6 +60,7 @@ dnf -y install \
     udiskie \
     wlsunset \
     cava \
+    foot \
 
 add_wants_niri() {
     sed -i "s/\[Unit\]/\[Unit\]\nWants=$1/" "/usr/lib/systemd/user/niri.service"
@@ -58,12 +72,12 @@ add_wants_niri udiskie.service
 add_wants_niri xwayland-satellite.service
 cat /usr/lib/systemd/user/niri.service
 
-# TESTING
-
-#enable noctalia.service
-
 git clone "https://github.com/zirconium-dev/zdots.git" /usr/share/zirconium/zdots
 cp -f /usr/share/zirconium/zdots/dot_config/niri/config.kdl /etc/niri/config.kdl
+
+# TESTING
+
+systemctl --user enable noctalia.service
 
 ### fonts
 
