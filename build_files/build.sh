@@ -5,27 +5,17 @@ set -ouex pipefail
 systemctl enable systemd-timesyncd
 systemctl enable systemd-resolved.service
 
-### Install packages
-
-# Packages can be installed from any enabled yum repo on the image.
-# RPMfusion repos are available by default in ublue main images
-# List of rpmfusion packages can be found here:
-# https://mirrors.rpmfusion.org/mirrorlist?path=free/fedora/updates/39/x86_64/repoview/index.html&protocol=https&redirect=1
-
-# this installs a package from fedora repos
 dnf -y install \
     uxplay     \
 
-# Use a COPR Example:
-#
-# dnf5 -y copr enable ublue-os/staging
-# dnf5 -y install package
-# Disable COPRs so they don't end up enabled on the final image:
-# dnf5 -y copr disable ublue-os/staging
 dnf -y copr enable yalter/niri
 dnf -y copr disable yalter/niri
 dnf -y --enablerepo copr:copr.fedorainfracloud.org:yalter:niri install niri
 rm -rf /usr/share/doc/niri
+
+dnf -y copr enable scottames/ghostty
+dnf -y copr disable scottames/ghostty
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:scottames:ghostty install ghostty
 
 dnf -y copr enable errornointernet/quickshell
 dnf -y copr disable errornointernet/quickshell
@@ -93,8 +83,3 @@ LATEST_RELEASE_FONT="$(curl "https://api.github.com/repos/subframe7536/maple-fon
 curl -fSsLo "${MAPLE_TMPDIR}/maple.zip" "${LATEST_RELEASE_FONT}"
 unzip "${MAPLE_TMPDIR}/maple.zip" -d "/usr/share/fonts/Maple Mono"
 
-echo 'source /usr/share/bizzite/shell/pure.bash' | tee -a "/etc/bashrc"
-
-#### Example for enabling a System Unit File
-
-#systemctl enable podman.socket
