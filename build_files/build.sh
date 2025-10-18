@@ -43,7 +43,7 @@ cat << 'EOF' > /usr/lib/systemd/user/noctalia.service
 Description=Noctalia Shell (Quickshell-based)
 
 [Service]
-ExecStart=/usr/bin/quickshell --config %h/.config/quickshell/noctalia-shell
+ExecStart=/usr/bin/quickshell --config /etc/skel/.config/quickshell/noctalia-shell
 Restart=on-failure
 
 [Install]
