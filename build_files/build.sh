@@ -101,9 +101,9 @@ systemctl preset --global udiskie
 systemctl preset --global xwayland-satellite
 
 
-git clone "https://github.com/noctalia-dev/noctalia-shell.git" /usr/share/bizzite-experi/noctalia-shell
+git clone "https://github.com/noctalia-dev/noctalia-shell.git" /usr/share/bizzite/noctalia-shell
 install -d /etc/niri/
-cp -f /usr/share/bizzite-experi/zdots/dot_config/niri/config.kdl /etc/niri/config.kdl
+cp -f /usr/share/bizzite/zdots/dot_config/niri/config.kdl /etc/niri/config.kdl
 
 
 mkdir -p "/usr/share/fonts/Maple Mono"
