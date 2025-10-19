@@ -3,13 +3,13 @@
 
 ### Opinionated Bazzite image with Niri and Noctalia
 
-This image is built on top of [Bazzite-dx](https://dev.bazzite.gg) and aims to provide [Niri](https://github.com/YaLTeR/niri) and [Noctalia](https://github.com/noctalia-dev/noctalia-shell) similar to Zirconium, while using Bazzite-DX-NVIDIA.
+This image is built on top of [Bazzite-dx](https://dev.bazzite.gg) and aims to provide [Niri](https://github.com/YaLTeR/niri) and [Noctalia](https://github.com/noctalia-dev/noctalia-shell) similar to [Zirconium](https://github.com/zirconium-dev/zirconium), while using Bazzite-DX-NVIDIA.
 
 ## Purpose
 
 The Containerfile is built directly off of [bazzite-dx-nvidia](https://github.com/ublue-os/bazzite-dx/pkgs/container/bazzite-dx-nvidia).
 
-This is my personal image and changes rapidly. If you want something designed for general consumption, I suggest using the aforementioned Zirconium image or Bazzite from [universal-blue.org](https://universal-blue.org/).
+This is my personal image and changes rapidly. If you want something designed for general consumption, I suggest using the aforementioned [Zirconium](https://github.com/zirconium-dev/zirconium) image or Bazzite from [universal-blue.org](https://universal-blue.org/).
 
 ## Credits
 
