@@ -48,7 +48,7 @@
                 {
                     "icon": "search",
                     "id": "CustomButton",
-                    "leftClickExec": "kwrite",
+                    "leftClickExec": "fuzzel",
                     "middleClickExec": "",
                     "rightClickExec": "",
                     "textCommand": "",

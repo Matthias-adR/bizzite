@@ -46,6 +46,7 @@ dnf -y install \
     xwayland-satellite \
     cava \
     fuzzel \
+    qt6ct
 
 
 systemctl disable sddm
