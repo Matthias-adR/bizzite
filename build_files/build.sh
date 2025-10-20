@@ -14,9 +14,11 @@ dnf -y copr enable scottames/ghostty
 dnf -y copr disable scottames/ghostty
 dnf -y --enablerepo copr:copr.fedorainfracloud.org:scottames:ghostty install ghostty
 
-dnf -y copr enable alternateved/cliphist
-dnf -y copr disable alternateved/cliphist
-dnf -y --enablerepo copr:copr.fedorainfracloud.org:alternateved:cliphist install cliphist
+dnf -y copr enable zirconium/packages
+dnf -y copr disable zirconium/packages
+dnf -y --enablerepo copr:copr.fedorainfracloud.org:zirconium:packages install \
+    matugen \
+    cliphist
 
 dnf -y copr enable errornointernet/quickshell
 dnf -y copr disable errornointernet/quickshell
