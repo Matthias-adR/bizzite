@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+fastfetch --logo /usr/share/bizzite/bizzite.txt --config /usr/share/bizzite/fastfetch.jsonc "${@}"

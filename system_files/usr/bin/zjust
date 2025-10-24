@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+just -f /usr/share/bizzite/just/00-start.just "${@}"
