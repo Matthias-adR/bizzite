@@ -56,63 +56,6 @@ fi
 git clone https://github.com/AvengeMedia/DankMaterialShell.git /etc/xdg/quickshell/dms
 
 
-# bazzite stuff
-dnf5 -y copr enable ycollet/audinux
-dnf5 -y copr enable bazzite-org/bazzite  
-dnf5 -y copr enable bazzite-org/bazzite-multilib  
-dnf5 -y copr enable bazzite-org/LatencyFleX  
-dnf5 -y copr enable bazzite-org/obs-vkcapture  
-dnf5 -y copr enable bazzite-org/webapp-manager
-
-dnf5 -y install \
-     steam \
-     mangohud \
-     gamescope \
-     gamescope-libs \
-     lutris \
-     vulkan-tools \
-     gamescope-shaders \
-     python3-pip \
-     python3-icoextract \
-     ds-inhibit \
-     lsb_release \
-     cpulimit \
-
-## bazzite repos  
-dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:bazzite-org:bazzite \
-    install --skip-broken vkBasalt.x86_64 VK_hdr_layer sunshine ryzenadj
-
-dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:bazzite-org:bazzite-multilib install \
-    vkBasalt.i686
-
-## LatencyFleX 
-dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:bazzite-org:LatencyFleX install \
-    latencyflex-vulkan-layer --skip-unavailable
-
-## obs-vkcapture 
-dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:bazzite-org:obs-vkcapture install \
-    libobs_vkcapture.x86_64 \
-    libobs_glcapture.x86_64 \
-    libobs_vkcapture.i686 \
-    libobs_glcapture.i686
-
-## webapp-manager
-dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:bazzite-org:webapp-manager install \
-    webapp-manager
-
-dnf5 -y install \
-     xone-kmod \
-     i2c-tools \
-     libcec \
-     umu-launcher
-
-dnf5 -y copr disable bazzite-org/bazzite
-dnf5 -y copr disable bazzite-org/bazzite-multilib
-dnf5 -y copr disable bazzite-org/LatencyFleX
-dnf5 -y copr disable bazzite-org/obs-vkcapture
-dnf5 -y copr disable bazzite-org/webapp-manager
-
-
 # main packages ig lol
 dnf5 -y remove alacritty
 
@@ -233,10 +176,10 @@ curl -L "https://github.com/tonsky/FiraCode/releases/latest/download/FiraCode-Re
 
 
 ## Zirconium's Niri dotfiles
-git clone "https://github.com/zirconium-dev/zdots.git" /usr/share/bifin/zdots
+git clone "https://github.com/zirconium-dev/zdots.git" /usr/share/bizzite/zdots
 install -d /etc/niri/
-cp -rf /usr/share/bifin/zdots/dot_config/niri/* /etc/niri/
-cp -f /usr/share/bifin/zdots/dot_config/niri/config.kdl /etc/niri/config.kdl
+cp -rf /usr/share/bizzite/zdots/dot_config/niri/* /etc/niri/
+cp -f /usr/share/bizzite/zdots/dot_config/niri/config.kdl /etc/niri/config.kdl
 file /etc/niri/config.kdl | grep -F -e "empty" -v
 stat /etc/niri/config.kdl
 
@@ -252,18 +195,18 @@ unzip "${MAPLE_TMPDIR}/maple.zip" -d "/usr/share/fonts/Maple Mono"
 
 
 # Fancy
-HOME_URL="https://github.com/matthias-adr/bifin"
-echo "bifin" | tee "/etc/hostname"
+HOME_URL="https://github.com/matthias-adr/bizzite"
+echo "bizzite" | tee "/etc/hostname"
 
 sed -i -f - /usr/lib/os-release <<EOF
-s|^NAME=.*|NAME=\"Bifin\"|
-s|^PRETTY_NAME=.*|PRETTY_NAME=\"Bifin\"|
+s|^NAME=.*|NAME=\"Bizzite\"|
+s|^PRETTY_NAME=.*|PRETTY_NAME=\"Bizzite\"|
 s|^VERSION_CODENAME=.*|VERSION_CODENAME=\"Posture\"|
 s|^VARIANT_ID=.*|VARIANT_ID=""|
 s|^HOME_URL=.*|HOME_URL=\"${HOME_URL}\"|
-s|^CPE_NAME=\".*\"|CPE_NAME=\"cpe:/o:matthias-adr:bifin\"|
+s|^CPE_NAME=\".*\"|CPE_NAME=\"cpe:/o:matthias-adr:bizzite\"|
 s|^DOCUMENTATION_URL=.*|DOCUMENTATION_URL=\"${HOME_URL}\"|
-s|^DEFAULT_HOSTNAME=.*|DEFAULT_HOSTNAME="bifin"|
+s|^DEFAULT_HOSTNAME=.*|DEFAULT_HOSTNAME="bizzite"|
 
 /^REDHAT_BUGZILLA_PRODUCT=/d
 /^REDHAT_BUGZILLA_PRODUCT_VERSION=/d
