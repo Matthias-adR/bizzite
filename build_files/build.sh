@@ -57,7 +57,9 @@ git clone https://github.com/AvengeMedia/DankMaterialShell.git /etc/xdg/quickshe
 
 
 # main packages ig lol
-dnf5 -y remove alacritty
+dnf5 -y remove \
+     alacritty \
+     hhd
 
 dnf5 -y install \
      hyfetch \
@@ -101,7 +103,8 @@ dnf5 -y install \
      webp-pixbuf-loader \
      google-roboto-fonts \
      gnome-keyring \
-     gnome-keyring-pam
+     gnome-keyring-pam \
+     default-fonts
 
 
 # amd stuff
@@ -161,16 +164,6 @@ systemctl enable --global dms.service
 systemctl enable --global xwayland-satellite.service
 systemctl enable --global gnome-keyring-daemon.socket
 systemctl enable --global gnome-keyring-daemon.service
-
-
-# fonts
-dnf5 -y install \
-    default-fonts-core-emoji \
-    google-noto-color-emoji-fonts \
-    google-noto-emoji-fonts \
-    glibc-all-langpacks \
-    default-fonts \
-    twitter-twemoji-fonts
 
 
 ## DMS
