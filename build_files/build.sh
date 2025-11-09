@@ -99,7 +99,9 @@ dnf5 -y install \
      dolphin \
      glycin-thumbnailer \
      webp-pixbuf-loader \
-     google-roboto-fonts
+     google-roboto-fonts \
+     gnome-keyring \
+     gnome-keyring-pam
 
 
 # amd stuff
@@ -157,6 +159,8 @@ systemctl enable --global dms.service
 #systemctl enable --global swayidle.service
 #systemctl enable --global udiskie.service
 systemctl enable --global xwayland-satellite.service
+systemctl enable --global gnome-keyring-daemon.socket
+systemctl enable --global gnome-keyring-daemon.service
 
 
 # fonts
