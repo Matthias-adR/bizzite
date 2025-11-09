@@ -1,0 +1,11 @@
+[Unit]
+Description=Idling daemon
+PartOf=graphical-session.target
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/libexec/zidle
+RestartSec=1
+
+[Install]
+WantedBy=graphical-session.target
