@@ -2,7 +2,7 @@ FROM scratch AS ctx
 COPY build_files /
 COPY system_files /files
 
-FROM ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:beta
+FROM ghcr.io/ublue-os/bazzite-dx-nvidia-gnome:latest
 
 RUN rm /opt && mkdir /opt
 

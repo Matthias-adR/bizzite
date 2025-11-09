@@ -7,7 +7,7 @@ This image is built on top of [Bazzite](https://bazzite.gg) and aims to provide 
 
 ## Purpose
 
-The Containerfile is built directly off of [`bazzite-dx-nvidia-gnome:beta`](https://github.com/orgs/ublue-os/packages/container/package/bazzite-dx-nvidia-gnome)
+The Containerfile is built directly off of [`bazzite-dx-nvidia-gnome:latest`](https://github.com/orgs/ublue-os/packages/container/package/bazzite-dx-nvidia-gnome)
 
 This is my personal image and changes rapidly. 
 
