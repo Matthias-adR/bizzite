@@ -45,7 +45,7 @@ dnf5 -y copr enable zirconium/packages
 dnf5 -y copr disable zirconium/packages
 dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:zirconium:packages install \
     matugen \
-    cliphist
+    cliphist --skip-unavailable
 
 mkdir -p /etc/xdg/quickshell
 if [ -d /etc/xdg/quickshell/dms ]; then
