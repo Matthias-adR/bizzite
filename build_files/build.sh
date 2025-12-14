@@ -22,7 +22,6 @@ dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:purian23:material-symbols-fo
 dnf5 -y copr enable avengemedia/danklinux
 dnf5 -y copr disable avengemedia/danklinux
 dnf5 -y --enablerepo copr:copr.fedorainfracloud.org:avengemedia:danklinux install \
-     hyprpicker \
      dgop \
      brightnessctl \
      cava \
